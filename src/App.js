@@ -1,23 +1,48 @@
 import logo from './logo.svg';
 import './App.css';
+import Navegacion from './components/Navegacion';
+import ListMovie from './components/ListMovie';
+import dataMovie from './data/Movie';
+import { useState } from 'react';
+import ListFavorito from './components/ListFavorito';
+
 
 function App() {
+  const [listMovie, setListMovie] = useState(dataMovie);
+  const [listMovieFavoritas, setListMovieFavoritas] = useState([]);
+  
+function addMovieFavorites(element) {
+   
+    const isAlreadyInFavorites = listMovieFavoritas.some((favorite) => favorite.Title === element.Title);
+
+    if (!isAlreadyInFavorites) {
+      const tempListMovie = [...listMovieFavoritas];
+      tempListMovie.push(element);
+      setListMovieFavoritas(tempListMovie);
+     }
+ }
+
+function handleRemoveFavorite(updatedFavorites) {
+    setListMovieFavoritas(updatedFavorites);
+   }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+     <Navegacion />
+     <div className='container'>
+      <div className='row'>
+        <div className='cold-md-9'>
+          <h1>Peliculas Marvel</h1>
+          <ListMovie 
+            elements={listMovie}
+            fnAddFavorites={addMovieFavorites}/>
+        </div>
+        <div className='col-md-3'>
+           
+         <ListFavorito elements={listMovieFavoritas} onRemoveFavorite={handleRemoveFavorite} />
+        </div>
+      </div>
+     </div>    
     </div>
   );
 }
