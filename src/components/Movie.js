@@ -21,9 +21,9 @@ function Movie(props){
         </div>
     }
     return(
-        <div className="col-md-4">
-            <div className="card mb-3 bgcard" >
-                <img src= {props.value.Poster} className="card-img-top" alt="..." />
+        <div className="col-md-3">
+            <div className="card mb-3" >
+               <img src= {props.value.Poster} className="card-img-top" alt="..." />
                 <div className="card-body text-lingt">
                    <h5 className="card-title">{props.value.Title}</h5>
                    <p className="card-text">{props.value.Plot.substring(0, 30)}</p> 
